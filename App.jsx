@@ -5,18 +5,24 @@ export default function App() {
   const [dice, setDice] = useState(generateAllNewDice());
 
   function generateAllNewDice() {
-    return new Array(10)
-      .fill(0)
-      .map(() => Math.ceil(Math.random() * 6));
+    return Array.from({ length: 10 }, () => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false
+    }));
   }
 
-  const diceElements = dice.map(num => <Die value={num} />);
+  const diceElements = dice.map(die => <Die value={die.value} isHeld={die.isHeld} />);
+
+  function rollDice() {
+    setDice(generateAllNewDice());
+  }
 
   return (
     <main>
       <div className="dice-container">
         {diceElements}
       </div>
+      <button className="roll-dice" onClick={rollDice}>Roll</button>
     </main>
   );
 }
