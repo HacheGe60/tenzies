@@ -1,5 +1,7 @@
-export default function Die({ value, isHeld }) {
+export default function Die(props) {
   return (
-    <button>{value}</button>
+    <button style={{ backgroundColor: props.isHeld ? "#59E391" : "white" }}>
+      {props.value}
+    </button>
   );
 }
